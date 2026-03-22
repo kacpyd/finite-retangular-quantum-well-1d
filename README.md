@@ -12,7 +12,7 @@ Program realizujący zadanie 1:
 - analiza różnych parametrów studni potencjału,
 - generowanie wykresów.
 
-### `src/atom1.py`
+### `src/atom_1.py`
 Program realizujący zadanie 2 oraz zadanie zaawansowane 1:
 - dopasowanie parametrów studni kwantowej do pierwszych poziomów energii atomu wodoru,
 - analiza zgodności wyników,
