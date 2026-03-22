@@ -1,38 +1,38 @@
-# Prostokątna skończona studnia kwantowa
-## Stacjonarne równanie Schrödingera w jednym wymiarze
+# Rectangular Finite Quantum Well
+## One-Dimensional Stationary Schrödinger Equation
 
-Projekt wykonany w Pythonie dotyczący numerycznego rozwiązania stacjonarnego równania Schrödingera dla prostokątnej skończonej studni kwantowej w jednym wymiarze.
+A Python project for the numerical solution of the stationary Schrödinger equation for a one-dimensional rectangular finite quantum well.
 
-Szczegółowe wyniki liczbowe znajdują się w pliku `results/wyniki.md`.
+Detailed numerical results can be found in the file `results/wyniki.md`.
 
-## Zawartość projektu
+## Project Contents
 
 ### `src/studnia4.py`
-Program realizujący zadanie 1:
-- tablicowanie funkcji `F_even(ε)` i `F_odd(ε)`,
-- wyznaczanie miejsc zerowych odpowiadających poziomom energii,
-- analiza różnych parametrów studni potencjału,
-- generowanie wykresów.
+Program implementing Task 1:
+- tabulation of the functions `F_even(ε)` and `F_odd(ε)`,
+- determination of zero points corresponding to energy levels,
+- analysis of various potential well parameters,
+- generation of graphs.
 
 ### `src/atom_1.py`
-Program realizujący zadanie 2 oraz zadanie zaawansowane 1:
-- dopasowanie parametrów studni kwantowej do pierwszych poziomów energii atomu wodoru,
-- analiza zgodności wyników,
-- automatyczne znajdowanie parametrów studni.
+Program implementing Task 2 and Advanced Task 1:
+- fitting the quantum well parameters to the first energy levels of the hydrogen atom,
+- analyzing the consistency of the results,
+- automatically finding the well parameters.
 
 ### `src/atom2.py`
-Program realizujący zadanie zaawansowane 2:
-- wyznaczanie funkcji własnych,
-- rysowanie funkcji własnych oraz `|ψ|²`,
-- obserwację tunelowania kwantowego.
+Program implementing Advanced Task 2:
+- determination of eigenfunctions,
+- plotting eigenfunctions and `|ψ|²`,
+- observation of quantum tunneling.
 
-## Wymagania
+## Requirements
 
-Projekt korzysta z bibliotek:
+The project uses the following libraries:
 - NumPy
 - SciPy
 - Matplotlib
 
-Instalacja:
+Installation:
 ```bash
 pip install -r requirements.txt
