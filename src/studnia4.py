@@ -1,53 +1,67 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# --- Funkcje fizyczne opisujące problem studni potencjału ---
+
 def k_fun(eps, V0):
+    # k = sqrt(2(E + V0)) – wewnętrzny wektor falowy w studni
     return np.sqrt(2*(eps + V0))
 
 def kappa_fun(eps):
+    # kappa = sqrt(-2E) – zanikający wektor falowy poza studnią
     return np.sqrt(-2*eps)
 
 def Feven(eps, a, V0):
+    # Równanie dla stanów parzystych: tan(k a/2) = kappa/k
     k = k_fun(eps, V0)
     kap = kappa_fun(eps)
     return np.sin(k*a/2) - (kap/k) * np.cos(k*a/2)
 
 def Fodd(eps, a, V0):
+    # Równanie dla stanów nieparzystych: tan(k a/2) = -k/kappa
     k = k_fun(eps, V0)
     kap = kappa_fun(eps)
     return np.sin(k*a/2) + (k/kap) * np.cos(k*a/2)
 
+# --- Funkcja rysująca wykresy Feven i Fodd ---
+
 def wykres(a, V0, opis):
-    
+    # Zakres energii: od -V0 do 0 (stany związane)
     eps = np.linspace(-V0 + 1e-4, -1e-4, 4000)
     
     fe = Feven(eps, a, V0)
     fo = Fodd(eps, a, V0)
 
+    # Usuwamy wartości zbyt duże, aby wykres był czytelny
     fe[np.abs(fe) > 20] = np.nan
     fo[np.abs(fo) > 20] = np.nan
     
     plt.figure(figsize=(10,6))
     plt.plot(eps, fe, label="Feven")
-    plt.plot(eps, fo, label="Food")
+    plt.plot(eps, fo, label="Fodd")
     plt.axhline(0, color="black")
     plt.xlabel("eps")
-    plt.ylabel("wartosc funckji")
+    plt.ylabel("wartosc funkcji")
     plt.title(f"{opis}  (a = {a}, V0 = {V0})")
     plt.grid(True)
     plt.legend()
     plt.show()
-    
+
+# --- Implementacja metody bisekcji ---
+
 def bisekcja(f, a, b , tol = 1e-10, max_itter = 100):
+    # Sprawdzamy, czy funkcja zmienia znak na przedziale
     if f(a) * f(b) >= 0:
         raise ValueError('Funkcja nie zmienia znaku na przedziale!')
         
     for i in range(max_itter):
-        c = (a + b) / 2
+        c = (a + b) / 2  # punkt środkowy
         
+        # Warunek zakończenia: wartość bliska 0 lub przedział bardzo mały
         if abs(f(c)) < tol or (b - a) / 2 < tol:
             return c
         
+        # Wybór podprzedziału, w którym funkcja zmienia znak
         if f(a) * f(c) < 0:
             b = c
         else:
@@ -55,23 +69,30 @@ def bisekcja(f, a, b , tol = 1e-10, max_itter = 100):
     
     return (a + b) / 2
 
+# --- Funkcja rozwiązująca dany przypadek studni ---
+
 def rozwiaz_przypadek(a, V0, opis, przedzialy_even, przedzialy_odd):
     print("\n======================")
     print(opis)
     print("a = ", a, "V0 = ", V0)
     
+    # Rysujemy wykres funkcji Feven i Fodd
     wykres(a, V0, opis)
     
     print("\nStany parzyste:")
     for lewy, prawy in przedzialy_even:
+        # Szukamy miejsca zerowego Feven metodą bisekcji
         root = bisekcja(lambda e: Feven(e, a, V0), lewy, prawy)
         print(f"przedzial [{lewy}, {prawy}] ---> eps = {root}")
         
     print("\nStany nieparzyste:")
     for lewy, prawy in przedzialy_odd:
+        # Szukamy miejsca zerowego Fodd metodą bisekcji
         root = bisekcja(lambda e: Fodd(e, a, V0), lewy, prawy)
         print(f"przedzial [{lewy}, {prawy}] ---> eps = {root}")
-        
+
+# --- Trzy przykładowe przypadki studni potencjału ---
+
 rozwiaz_przypadek(
     a = 8,
     V0 = 0.5,
