@@ -3,6 +3,8 @@
 
 Projekt wykonany w Pythonie dotyczący numerycznego rozwiązania stacjonarnego równania Schrödingera dla prostokątnej skończonej studni kwantowej w jednym wymiarze.
 
+Szczegółowe wyniki liczbowe znajdują się w pliku `results/wyniki.md`.
+
 ## Zawartość projektu
 
 ### `src/studnia4.py`
