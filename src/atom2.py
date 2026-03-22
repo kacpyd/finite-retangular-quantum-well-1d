@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Mar 15 20:52:11 2026
-
-@author: kacpe
-"""
-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import fsolve
